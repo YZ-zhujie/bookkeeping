@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyApplication</string>
+    <string name="title_dashboard">概览</string>
+    <string name="title_accounting">账本</string>
+    <string name="title_items">物品</string>
+    <string name="action_add">记一笔</string>
+</resources>
