@@ -9,9 +9,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.button.MaterialButtonToggleGroup;
-import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.widget.Toolbar;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.RadioButton;
 import com.zzj.myapplication.db.AccountDao;
 import com.zzj.myapplication.db.CategoryDao;
 import com.zzj.myapplication.db.RecordDao;
@@ -32,9 +33,9 @@ import java.util.Locale;
  */
 public class AddRecordActivity extends AppCompatActivity {
 
-    private TextInputEditText etAmount, etNote, etDateDisplay;
+    private EditText etAmount, etNote, etDateDisplay;
     private AutoCompleteTextView actvCategory, actvAccount;
-    private MaterialButtonToggleGroup toggleType;
+    private RadioGroup toggleType;
     private Button btnSave;
     
     private long selectedDate;
@@ -55,7 +56,7 @@ public class AddRecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
         
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -80,18 +81,16 @@ public class AddRecordActivity extends AppCompatActivity {
         recordDao = new RecordDao(this);
 
         // 监听收支类型切换
-        toggleType.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
-            if (isChecked) {
-                if (checkedId == R.id.btn_income) {
-                    currentType = Record.TYPE_INCOME;
-                } else {
-                    currentType = Record.TYPE_EXPENSE;
-                }
-                loadCategories(); // 切换类型时重新加载对应分类
-                // 清空之前的选择
-                actvCategory.setText("");
-                selectedCategoryIndex = -1;
+        toggleType.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.btn_income) {
+                currentType = Record.TYPE_INCOME;
+            } else {
+                currentType = Record.TYPE_EXPENSE;
             }
+            loadCategories(); // 切换类型时重新加载对应分类
+            // 清空之前的选择
+            actvCategory.setText("");
+            selectedCategoryIndex = -1;
         });
         // 默认选中支出
         toggleType.check(R.id.btn_expense);

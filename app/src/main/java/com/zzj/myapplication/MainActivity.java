@@ -8,7 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 /**
  * 主应用程序入口 Activity
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        让内容可以显示到状态栏/导航栏后面
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         
@@ -33,34 +34,21 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // 初始化底部导航栏
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setOnItemSelectedListener(item -> {
-            Fragment selectedFragment = null;
-            int itemId = item.getItemId();
-            
-            // 根据点击的菜单项切换 Fragment
-            if (itemId == R.id.navigation_dashboard) {
-                selectedFragment = new DashboardFragment();
-            } else if (itemId == R.id.navigation_accounting) {
-                selectedFragment = new RecordListFragment();
-            } else if (itemId == R.id.navigation_items) {
-                selectedFragment = new ItemListFragment();
-            }
-
-            // 替换当前的 Fragment
-            if (selectedFragment != null) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main, selectedFragment)
-                        .commit();
-                return true;
-            }
-            return false;
-        });
+        // 初始化底部导航栏 (自定义实现)
+        findViewById(R.id.nav_dashboard).setOnClickListener(v -> switchFragment(new DashboardFragment()));
+        findViewById(R.id.nav_accounting).setOnClickListener(v -> switchFragment(new RecordListFragment()));
+        findViewById(R.id.nav_items).setOnClickListener(v -> switchFragment(new ItemListFragment()));
 
         // 默认选中首页 (Dashboard)
         if (savedInstanceState == null) {
-            navView.setSelectedItemId(R.id.navigation_dashboard);
+            switchFragment(new DashboardFragment());
         }
+    }
+
+    // 替换内容区的内容
+    private void switchFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.nav_host_fragment_activity_main, fragment)
+                .commit();
     }
 }

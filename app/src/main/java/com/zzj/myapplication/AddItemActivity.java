@@ -13,9 +13,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.widget.Toolbar;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import com.zzj.myapplication.db.ItemDao;
 import com.zzj.myapplication.model.Item;
 
@@ -29,9 +29,9 @@ import java.util.Locale;
  */
 public class AddItemActivity extends AppCompatActivity {
 
-    private TextInputEditText etName, etPrice, etDateDisplay;
+    private EditText etName, etPrice, etDateDisplay;
     private ImageView ivPhoto;
-    private MaterialCardView cardPhoto;
+    private android.view.View cardPhoto;
     private Button btnSave;
     private ItemDao itemDao;
     
@@ -63,7 +63,7 @@ public class AddItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

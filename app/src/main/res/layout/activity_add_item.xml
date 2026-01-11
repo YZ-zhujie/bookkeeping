@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:fitsSystemWindows="true"
     tools:context=".AddItemActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="添加物品"
-            app:titleCentered="true" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?android:attr/windowBackground"
+        app:title="添加物品" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,24 +27,21 @@
             android:padding="24dp">
 
             <!-- 照片选择区域 -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- 照片选择区域 -->
+            <FrameLayout
                 android:id="@+id/card_photo"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="32dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:strokeColor="#E0E0E0"
-                app:strokeWidth="1dp">
+                android:background="#F5F5F5">
 
                 <ImageView
                     android:id="@+id/iv_item_photo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@android:drawable/ic_menu_camera"
-                    android:background="#F5F5F5" />
+                    android:src="@android:drawable/ic_menu_camera" />
                 
                 <TextView
                     android:layout_width="wrap_content"
@@ -65,81 +55,49 @@
                     android:paddingBottom="2dp"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
-                    android:layout_marginBottom="4dp"
-                    style="@style/TextAppearance.MaterialComponents.Caption"/>
+                    android:layout_marginBottom="4dp"/>
 
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
             <!-- 物品名称输入框 -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_name"
+            <EditText
+                android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="物品名称"
-                app:startIconDrawable="@android:drawable/ic_menu_edit"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textCapSentences"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:inputType="textCapSentences"
+                android:layout_marginBottom="16dp"/>
 
             <!-- 价格输入框 -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_price"
+            <EditText
+                android:id="@+id/et_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="购买价格 (元)"
-                app:startIconDrawable="@android:drawable/ic_menu_info_details"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:inputType="numberDecimal" 
+                android:layout_marginBottom="16dp"/>
 
             <!-- 日期选择框 (伪装成输入框) -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_date"
+            <EditText
+                android:id="@+id/et_date_display"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="购买日期"
-                app:startIconDrawable="@android:drawable/ic_menu_today"
-                app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
-                app:endIconMode="custom"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginBottom="32dp">
+                android:focusable="false"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:layout_marginBottom="32dp"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_date_display"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:clickable="true"
-                    android:cursorVisible="false" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btn_save_item"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:text="保存物品"
                 android:textSize="16sp"
-                app:cornerRadius="28dp"
                 android:layout_marginTop="16dp"/>
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

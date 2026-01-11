@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.widget.ImageButton;
 import com.zzj.myapplication.db.ItemDao;
 import com.zzj.myapplication.model.Item;
 
@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 public class ItemListFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private FloatingActionButton fabAddItem;
+    private ImageButton fabAddItem;
     private ItemAdapter adapter;
     private ItemDao itemDao;
     private List<Item> itemList;
