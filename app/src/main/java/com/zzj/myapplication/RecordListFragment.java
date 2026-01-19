@@ -49,7 +49,7 @@ public class RecordListFragment extends Fragment {
     private TextView tvSummaryIncome, tvSummaryExpense;
     private LineChart statsChart;
     
-    // 0: 本周, 1: 本月, 2: 本年
+    // 0: 本周, 1: 本月
     private int currentTimeScope = 1; 
 
     /**
@@ -110,8 +110,8 @@ public class RecordListFragment extends Fragment {
         
         // Load Category Map
         List<Category> categories = categoryDao.getAllCategories();
-        Map<Integer, String> categoryMap = new HashMap<>();
-        for (Category c : categories) categoryMap.put(c.getId(), c.getName());
+        Map<Integer, Category> categoryMap = new HashMap<>();
+        for (Category c : categories) categoryMap.put(c.getId(), c);
         
         adapter.setCategoryMap(categoryMap);
         adapter.setRecordList(recordList);
@@ -248,10 +248,6 @@ public class RecordListFragment extends Fragment {
                 break;
             case 1: // 本月 - 过去 30 天
                 start = end - (30L * 24 * 60 * 60 * 1000);
-                break;
-            case 2: // 本年
-                cal.set(Calendar.DAY_OF_YEAR, 1);
-                start = cal.getTimeInMillis();
                 break;
         }
         

@@ -1,91 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:background="#F5F5F5">
 
-    <RelativeLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/card_summary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@android:drawable/dialog_holo_light_frame"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_total_items"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="共 0 件物品"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="#333333"/>
-            
-            <ImageView
-                android:id="@+id/iv_privacy_toggle"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentEnd="true"
-                android:src="@android:drawable/ic_menu_view"
-                android:contentDescription="Toggle Privacy"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackgroundBorderless"/>
-        </RelativeLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="12dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_summary"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="总成本: "
-                android:textSize="14sp"
-                android:textColor="#666666"/>
-            <TextView
-                android:id="@+id/tv_total_cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="¥0.00"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#333333"
-                android:layout_marginStart="8dp"/>
+                android:layout_margin="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:contentPadding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_total_items"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="共 0 件物品"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="#333333"/>
+                        
+                        <ImageView
+                            android:id="@+id/iv_privacy_toggle"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentEnd="true"
+                            android:src="@android:drawable/ic_menu_view"
+                            android:contentDescription="Toggle Privacy"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:tint="?attr/colorPrimary"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="总成本"
+                            android:textSize="14sp"
+                            android:textColor="#757575"/>
+                        <TextView
+                            android:id="@+id/tv_total_cost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="¥0.00"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorPrimary"
+                            android:layout_marginStart="12dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_items"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="88dp"/>
         </LinearLayout>
 
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_items"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/card_summary"
-        android:paddingBottom="80dp" 
-        android:clipToPadding="false"/>
-        <!-- Added paddingBottom to avoid FAB covering last item -->
-        <ImageButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add_item"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="24dp"
             android:src="@android:drawable/ic_input_add"
-            android:background="@android:drawable/btn_default"
-            android:contentDescription="Add Item" 
-            android:elevation="6dp"/>
-    </RelativeLayout>
+            app:tint="#FFFFFF"
+            android:contentDescription="Add Item"
+            app:elevation="6dp"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

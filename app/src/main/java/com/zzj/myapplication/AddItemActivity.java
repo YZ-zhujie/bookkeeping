@@ -52,6 +52,8 @@ public class AddItemActivity extends AppCompatActivity {
                         // 申请长期读取权限
                         getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
                         selectedPhotoPath = uri.toString();
+                        // 清除着色以显示原图
+                        ivPhoto.setImageTintList(null);
                         ivPhoto.setImageURI(uri);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -132,6 +134,8 @@ public class AddItemActivity extends AppCompatActivity {
             
             if (selectedPhotoPath != null) {
                 try {
+                    // 清除着色以显示原图
+                    ivPhoto.setImageTintList(null);
                     ivPhoto.setImageURI(Uri.parse(selectedPhotoPath));
                 } catch (Exception e) {
                      ivPhoto.setImageResource(android.R.drawable.ic_menu_camera); 

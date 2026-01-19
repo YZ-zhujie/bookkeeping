@@ -52,55 +52,88 @@
             </RadioGroup>
 
             <!-- 金额输入 -->
-            <EditText
-                android:id="@+id/et_amount"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="金额"
-                android:inputType="numberDecimal"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp"/>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginBottom="16dp">
+                
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:textSize="24sp"
+                    android:textStyle="bold"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- 分类选择 -->
-            <AutoCompleteTextView
-                android:id="@+id/actv_category"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="分类"
-                android:inputType="none"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp"/>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_marginBottom="16dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actv_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:padding="16dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- 账户选择 -->
-            <AutoCompleteTextView
-                android:id="@+id/actv_account"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="账户"
-                android:inputType="none"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp"/>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_marginBottom="16dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actv_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:padding="16dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- 日期选择 -->
-            <EditText
-                android:id="@+id/et_date_display"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="日期"
-                android:focusable="false"
-                android:clickable="true"
-                android:cursorVisible="false"
-                android:layout_marginBottom="16dp"/>
+                app:startIconDrawable="@android:drawable/ic_menu_my_calendar"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_date_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:cursorVisible="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- 备注 -->
-            <EditText
-                android:id="@+id/et_note"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="备注"
-                android:inputType="text"
-                android:layout_marginBottom="32dp"/>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginBottom="32dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_save"

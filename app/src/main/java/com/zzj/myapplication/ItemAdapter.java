@@ -135,6 +135,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         // 如果有图片路径，加载显示图片
         if (item.getPhotoPath() != null && !item.getPhotoPath().isEmpty()) {
             try {
+                holder.ivPhoto.setImageTintList(null);
                 holder.ivPhoto.setImageURI(Uri.parse(item.getPhotoPath()));
             } catch (Exception e) {
                  holder.ivPhoto.setImageResource(android.R.drawable.ic_menu_camera); 
