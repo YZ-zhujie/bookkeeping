@@ -26,6 +26,9 @@ import java.util.List;
  */
 public class DashboardFragment extends Fragment {
 
+    /**
+     * 后续增加，显示支付类型的汇总
+     */
     private TextView tvTotalBalance;
     private TextView tvMonthIncome;
     private TextView tvMonthExpense;
@@ -54,7 +57,7 @@ public class DashboardFragment extends Fragment {
         recordDao = new RecordDao(getContext());
 
         // 点击 "记一笔" 按钮跳转到记账页面
-        btnAddRecord.setOnClickListener(v -> {
+            btnAddRecord.setOnClickListener(v -> {
              startActivity(new Intent(getActivity(), AddRecordActivity.class));
         });
 
@@ -89,6 +92,7 @@ public class DashboardFragment extends Fragment {
         double monthIncome = 0;
         double monthExpense = 0;
 
+        // 获取当前时间
         Calendar calendar = Calendar.getInstance();
         int currentMonth = calendar.get(Calendar.MONTH);
         int currentYear = calendar.get(Calendar.YEAR);

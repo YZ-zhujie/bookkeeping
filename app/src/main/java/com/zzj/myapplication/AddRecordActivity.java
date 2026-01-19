@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.RadioButton;
 import com.zzj.myapplication.db.AccountDao;
 import com.zzj.myapplication.db.CategoryDao;
 import com.zzj.myapplication.db.RecordDao;
@@ -62,6 +61,7 @@ public class AddRecordActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
+        // 返回上一页
         toolbar.setNavigationOnClickListener(v -> finish());
 
         // 初始化 UI 控件
@@ -80,6 +80,9 @@ public class AddRecordActivity extends AppCompatActivity {
         categoryDao = new CategoryDao(this);
         recordDao = new RecordDao(this);
 
+        // 默认选中支出
+        toggleType.check(R.id.btn_expense);
+
         // 监听收支类型切换
         toggleType.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.btn_income) {
@@ -92,8 +95,6 @@ public class AddRecordActivity extends AppCompatActivity {
             actvCategory.setText("");
             selectedCategoryIndex = -1;
         });
-        // 默认选中支出
-        toggleType.check(R.id.btn_expense);
 
         // 加载数据
         loadAccounts();
@@ -108,7 +109,6 @@ public class AddRecordActivity extends AppCompatActivity {
         // 保存按钮点击事件
         btnSave.setOnClickListener(v -> saveRecord());
         
-        // AutoCompleteTextView item click listeners
         actvAccount.setOnItemClickListener((parent, view, position, id) -> {
             selectedAccountIndex = position;
         });
@@ -116,6 +116,9 @@ public class AddRecordActivity extends AppCompatActivity {
         actvCategory.setOnItemClickListener((parent, view, position, id) -> {
             selectedCategoryIndex = position;
         });
+
+        actvAccount.setOnClickListener(v -> actvAccount.showDropDown());
+        actvCategory.setOnClickListener(v -> actvCategory.showDropDown());
     }
 
     /**
@@ -128,6 +131,7 @@ public class AddRecordActivity extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        // 点击确认的时候， 更新Calendar 到用户新选择的日期，更新时间戳，已经ui
         new DatePickerDialog(this, (view, year1, month1, dayOfMonth) -> {
             calendar.set(year1, month1, dayOfMonth);
             selectedDate = calendar.getTimeInMillis();

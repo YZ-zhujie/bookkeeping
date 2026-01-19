@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.Toolbar;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import com.zzj.myapplication.db.ItemDao;
 import com.zzj.myapplication.model.Item;
 
@@ -42,11 +41,15 @@ public class AddItemActivity extends AppCompatActivity {
     private int editingItemId = -1;
     private Item editingItem;
 
+    /**
+     * 打开相册，选择图片
+     */
     private final ActivityResultLauncher<String[]> photoPickerLauncher = registerForActivityResult(
             new ActivityResultContracts.OpenDocument(),
             uri -> {
                 if (uri != null) {
                     try {
+                        // 申请长期读取权限
                         getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
                         selectedPhotoPath = uri.toString();
                         ivPhoto.setImageURI(uri);
@@ -198,6 +201,7 @@ public class AddItemActivity extends AppCompatActivity {
             editingItem.setPhotoPath(selectedPhotoPath);
             
             itemDao.updateItem(editingItem);
+            // 提示框
             Toast.makeText(this, "更新成功", Toast.LENGTH_SHORT).show();
         } else {
             // 创建物品对象

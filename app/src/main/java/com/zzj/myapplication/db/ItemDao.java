@@ -123,6 +123,7 @@ public class ItemDao {
     }
 
     /**
+     *
      * 更新物品状态
      * @param itemId 物品ID
      * @param newStatus 新状态
