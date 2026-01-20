@@ -75,6 +75,20 @@ public class RecordListFragment extends Fragment {
         categoryDao = new CategoryDao(getContext());
         recordList = new ArrayList<>();
         adapter = new RecordAdapter(recordList);
+        
+        // Set delete listener
+        adapter.setOnDeleteListener(record -> {
+            new androidx.appcompat.app.AlertDialog.Builder(getContext())
+                .setTitle("删除记录")
+                .setMessage("确定要删除这条记录吗？")
+                .setPositiveButton("删除", (dialog, which) -> {
+                    recordDao.deleteRecord(record);
+                    loadData(); // Refresh list and stats
+                })
+                .setNegativeButton("取消", null)
+                .show();
+        });
+
         recyclerView.setAdapter(adapter);
         
         // 监听筛选变化

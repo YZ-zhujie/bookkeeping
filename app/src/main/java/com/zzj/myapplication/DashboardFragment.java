@@ -36,6 +36,10 @@ public class DashboardFragment extends Fragment {
 
     private AccountDao accountDao;
     private RecordDao recordDao;
+    
+    // Music Player
+    private android.media.MediaPlayer mediaPlayer;
+    private com.google.android.material.floatingactionbutton.FloatingActionButton fabMusicControl;
 
     /**
      * 创建 Fragment 视图
@@ -57,11 +61,56 @@ public class DashboardFragment extends Fragment {
         recordDao = new RecordDao(getContext());
 
         // 点击 "记一笔" 按钮跳转到记账页面
-            btnAddRecord.setOnClickListener(v -> {
+        btnAddRecord.setOnClickListener(v -> {
              startActivity(new Intent(getActivity(), AddRecordActivity.class));
         });
 
+        // 初始化背景音乐
+        fabMusicControl = view.findViewById(R.id.fab_music_control);
+        initMusicPlayer();
+
+        fabMusicControl.setOnClickListener(v -> {
+            if (mediaPlayer != null) {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                    fabMusicControl.setImageResource(android.R.drawable.ic_media_play);
+                } else {
+                    mediaPlayer.start();
+                    fabMusicControl.setImageResource(android.R.drawable.ic_media_pause);
+                }
+            }
+        });
+
         return view;
+    }
+
+    private void initMusicPlayer() {
+        if (mediaPlayer == null) {
+            mediaPlayer = android.media.MediaPlayer.create(getContext(), R.raw.bgm);
+            if (mediaPlayer != null) {
+                mediaPlayer.setLooping(true); // 循环播放
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            if (fabMusicControl != null) {
+                fabMusicControl.setImageResource(android.R.drawable.ic_media_play);
+            }
+        }
     }
 
     /**

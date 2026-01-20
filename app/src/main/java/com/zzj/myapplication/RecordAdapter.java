@@ -26,6 +26,16 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     private Map<Integer, com.zzj.myapplication.model.Category> categoryMap;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
 
+    private OnRecordDeleteListener deleteListener;
+
+    public interface OnRecordDeleteListener {
+        void onDeleteClick(Record record);
+    }
+
+    public void setOnDeleteListener(OnRecordDeleteListener listener) {
+        this.deleteListener = listener;
+    }
+
     public RecordAdapter(List<Record> recordList) {
         this.recordList = recordList;
         this.categoryMap = new java.util.HashMap<>();
@@ -100,6 +110,12 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         }
         
         holder.tvDate.setText(dateFormat.format(new Date(record.getDate())));
+
+        holder.btnDelete.setOnClickListener(v -> {
+            if (deleteListener != null) {
+                deleteListener.onDeleteClick(record);
+            }
+        });
     }
 
     @Override
@@ -113,6 +129,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         public TextView tvNote;
         public TextView tvAmount;
         public TextView tvDate;
+        public android.widget.ImageButton btnDelete;
 
         public ViewHolder(View view) {
             super(view);
@@ -121,6 +138,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             tvNote = view.findViewById(R.id.tv_note);
             tvAmount = view.findViewById(R.id.tv_amount);
             tvDate = view.findViewById(R.id.tv_date);
+            btnDelete = view.findViewById(R.id.btn_delete);
         }
     }
 }

@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:background="#F5F5F5">
 
-    <!-- Top Bar: Filter and Summary -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,7 +46,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Chart View -->
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/stats_chart"
         android:layout_width="match_parent"
@@ -56,7 +54,6 @@
         android:background="@android:color/white"
         android:elevation="2dp"/>
 
-    <!-- Records List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_records"
         android:layout_width="match_parent"
