@@ -3,5 +3,6 @@
     <string-array name="time_scopes">
         <item>本周</item>
         <item>本月</item>
+        <item>全部</item>
     </string-array>
 </resources>

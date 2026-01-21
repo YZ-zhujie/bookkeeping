@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.zzj.myapplication.model.Category;
 import com.zzj.myapplication.model.Record;
 
 import java.text.SimpleDateFormat;
@@ -23,11 +24,14 @@ import java.util.Map;
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder> {
 
     private List<Record> recordList;
-    private Map<Integer, com.zzj.myapplication.model.Category> categoryMap;
+    private Map<Integer, Category> categoryMap;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
 
     private OnRecordDeleteListener deleteListener;
 
+    /**
+     * 删除后回掉接口
+     */
     public interface OnRecordDeleteListener {
         void onDeleteClick(Record record);
     }
@@ -45,7 +49,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
      * 设置分类映射表
      * @param categoryMap 分类 ID 到 Category 对象的映射
      */
-    public void setCategoryMap(Map<Integer, com.zzj.myapplication.model.Category> categoryMap) {
+    public void setCategoryMap(Map<Integer, Category> categoryMap) {
         this.categoryMap = categoryMap;
         notifyDataSetChanged();
     }

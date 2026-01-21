@@ -60,7 +60,6 @@ public class ItemDetailActivity extends AppCompatActivity {
         rbInUse = findViewById(R.id.rb_in_use);
         rbIdle = findViewById(R.id.rb_idle);
         rbLost = findViewById(R.id.rb_lost);
-        rbSold = findViewById(R.id.rb_sold);
         btnUpdate = findViewById(R.id.btn_update_status);
         Button btnEdit = findViewById(R.id.btn_edit_item);
 
@@ -167,7 +166,6 @@ public class ItemDetailActivity extends AppCompatActivity {
             case Item.STATUS_IN_USE: rbInUse.setChecked(true); break;
             case Item.STATUS_IDLE: rbIdle.setChecked(true); break;
             case Item.STATUS_LOST: rbLost.setChecked(true); break;
-            case Item.STATUS_SOLD: rbSold.setChecked(true); break;
         }
     }
 
@@ -179,7 +177,6 @@ public class ItemDetailActivity extends AppCompatActivity {
         if (rbInUse.isChecked()) newStatus = Item.STATUS_IN_USE;
         else if (rbIdle.isChecked()) newStatus = Item.STATUS_IDLE;
         else if (rbLost.isChecked()) newStatus = Item.STATUS_LOST;
-        else if (rbSold.isChecked()) newStatus = Item.STATUS_SOLD;
 
         itemDao.updateItemStatus(itemId, newStatus);
         Toast.makeText(this, "状态已更新", Toast.LENGTH_SHORT).show();

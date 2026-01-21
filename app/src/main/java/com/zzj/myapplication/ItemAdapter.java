@@ -121,10 +121,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                 statusText = "丢失";
                 color = 0xFFF44336; // Red
                 break;
-            case Item.STATUS_SOLD:
-                statusText = "已售";
-                color = 0xFF9E9E9E; // Grey
-                break;
+
             default:
                 statusText = "未知";
                 color = 0xFF9E9E9E;

@@ -36,9 +36,10 @@ public class DashboardFragment extends Fragment {
 
     private AccountDao accountDao;
     private RecordDao recordDao;
-    
-    // Music Player
+
+    // 背景音乐
     private android.media.MediaPlayer mediaPlayer;
+    // 控制按钮
     private com.google.android.material.floatingactionbutton.FloatingActionButton fabMusicControl;
 
     /**

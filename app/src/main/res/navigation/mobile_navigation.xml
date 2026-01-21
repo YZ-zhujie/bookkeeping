@@ -22,5 +22,4 @@
         android:name="com.zzj.myapplication.ItemListFragment"
         android:label="@string/title_items"
         tools:layout="@layout/fragment_item_list" />
-
 </navigation>
